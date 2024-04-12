@@ -213,6 +213,13 @@ func printPS(t *task.Task, pid int) error {
 	return nil
 }
 
+func printFiles(t *task.Task) {
+	fmt.Printf("\n%s\n\n", color.BrightGreen("[*] Files:"))
+	fmt.Printf("%s\n", color.BrightGreen("Type:\tPermissions:\tName:"))
+	fmt.Printf("%s\n", color.BrightGreen("═══\t════\t════════"))
+	fmt.Printf("%s\n", color.BrightWhite(string(t.Payload)))
+}
+
 func printAV(t *task.Task) {
 	fmt.Printf("\n%s\n\n", color.BrightGreen("[*] AV/EDR:"))
 	fmt.Printf("%s\n", color.BrightWhite(string(t.Payload)))
@@ -261,6 +268,7 @@ func printHelpInt() {
 		"shellcode\tInject shellcode in new process\n"+
 		"sleep\t\tSet sleep time\n"+
 		"ps\t\tGet process list\n"+
+		"ls\t\tGet file listing\n"+
 		"av\t\tGet AV/EDR with wmi\n"+
 		"priv\t\tGet privileges and integrity level\n"+
 		"info\t\tShow all the kitten info\n"+

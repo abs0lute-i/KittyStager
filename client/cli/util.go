@@ -182,6 +182,8 @@ func checkForResponse(name string) error {
 		printAV(t)
 	case "priv":
 		printPriv(t)
+	case "ls":
+		printFiles(t)
 	}
 	return nil
 }

